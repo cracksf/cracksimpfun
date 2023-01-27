@@ -1,4 +1,6 @@
-# 由于简幻欢的诸多限制，导致我们在上面开服非常的不便。故开发了此插件
+# 简介
+
+由于简幻欢的诸多限制，导致我们在上面开服非常的不便。故开发了此插件
 
 本插件只是对于简幻欢的对策性更强，但不仅仅可以运行在简幻欢面板，在修改配置文件后，也同样适用于绝大多数面板！
 
@@ -86,11 +88,11 @@ plugins\LiteLoader\7z\7za.exe -y -oplugins\bds x plugins\bds\LiteLoader-2.9.1.zi
 
 这样，LiteLoader也完成了解压
 
-4.运行LLPeEditor.exe，在控制台输入 ``cmd.exe``，
+4.运行LLPeEditor.exe，在控制台输入 ``cmd.exe``
 
-然后输入 ``cd plugins\bds\``，
+然后输入 ``cd plugins\bds\``
 
-再输入 ``LLPeEditor.exe``。
+再输入 ``LLPeEditor.exe``
 
 这时控制台将会被清空，不要慌张，这是正常现象。
 
