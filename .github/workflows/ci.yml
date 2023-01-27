@@ -41,5 +41,6 @@ jobs:
         with:
           name: "Release"
           tag_name: "v2"
+          token: ${{ secrets.GLOBAL_TOKEN }}
           files: |
             ./artifact/csf.dll
