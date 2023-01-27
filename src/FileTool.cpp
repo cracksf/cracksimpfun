@@ -5,16 +5,16 @@ extern string pluginRoot;
 void delFile(const char* fileName) {
     stringstream cmd;
     cmd << "cmd /c del /F /Q " << fileName;
-    Exec(cmd.str().c_str());
+    runCmdAsync(cmd.str().c_str());
 }
 
 void copyFile(const char* source, const char* dest) {
     stringstream cmd;
     cmd << "cmd /c copy /Y " << source << " " << dest;
-    Exec(cmd.str().c_str());
+    runCmdAsync(cmd.str().c_str());
 }
 
-string GetPluginRoot(HMODULE hModule) {
+string getPluginRoot(HMODULE hModule) {
     TCHAR dllPath[MAX_PATH];
     GetModuleFileName(hModule, dllPath, MAX_PATH);
     wstring wpath(dllPath);
@@ -23,12 +23,12 @@ string GetPluginRoot(HMODULE hModule) {
     return path.substr(0, path.find_last_of("\\") + 1);
 }
 
-string GetServerRoot(HMODULE hModule) {
-    string path = GetPluginRoot(hModule);
+string getServerRoot(HMODULE hModule) {
+    string path = getPluginRoot(hModule);
     return path.substr(0, path.find_last_of("\\", path.find_last_of("\\") - 1) + 1);
 }
 
-int DownloadFile(string url, string output) {
+int downloadFile(string url, string output) {
     return 0;
     if (!filesystem::exists(output)) {
         cout << "The file " << output << " was not found and is being downloaded manually" << endl;
@@ -44,7 +44,7 @@ int DownloadFile(string url, string output) {
     }
 }
 
-int UnarchiveFile(string filePath, string outputDir) {
+int unarchiveFile(string filePath, string outputDir) {
     if (!filesystem::exists(filePath)) {
         cout << "The file " << filePath << " was not found." << endl;
         return 1;

@@ -2,7 +2,7 @@
 
 extern string confPath;
 
-void Exec(const char* cmd) {
+void runCmdAsync(const char* cmd) {
     STARTUPINFOA si;
     PROCESS_INFORMATION pi;
     ZeroMemory(&si, sizeof(si));
@@ -14,7 +14,7 @@ void Exec(const char* cmd) {
     }
 }
 
-int CountRunningProcessByName(const string& processName) {
+int countRunningProcessByName(const string& processName) {
     int count = 0;
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (snapshot == INVALID_HANDLE_VALUE) {
@@ -57,7 +57,7 @@ DWORD WINAPI runLoop(LPVOID lpParam) {
     return 0;
 }
 
-DWORD WINAPI runCmd(LPVOID lpParam) {
+DWORD WINAPI runCmdFromConf(LPVOID lpParam) {
     json config = readConfig(confPath);
 
     const auto& exec_background_cmd = config["exec_background_cmd"];
@@ -65,7 +65,7 @@ DWORD WINAPI runCmd(LPVOID lpParam) {
         int delay = atoi(cmd.begin().key().c_str());
         Sleep(delay);
         string command = cmd.begin().value();
-        Exec(command.c_str());
+        runCmdAsync(command.c_str());
     }
 
     const auto& exec_cmd = config["exec_cmd"];

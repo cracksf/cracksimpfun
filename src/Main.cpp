@@ -19,7 +19,7 @@ void PluginLoaded() {
             int allowedCount = atoi(item.begin().key().c_str());
             if (allowedCount > 0) {
                 string processName = item.begin().value();
-                int processCount = CountRunningProcessByName(processName);
+                int processCount = countRunningProcessByName(processName);
                 if (processCount > allowedCount) {
                     cout << "csf: The number of running " << processName << "(" << processCount << ") has been detected as more than the number specified in the configuration file, the plugin will not load!" << endl;
                     return;
@@ -46,7 +46,7 @@ void PluginLoaded() {
         SetThreadPriority(daemon_thread_run_loop, THREAD_PRIORITY_IDLE);
         ResumeThread(daemon_thread_run_loop);
 
-        HANDLE daemon_thread_run_cmd = CreateThread(NULL, 0, runCmd, NULL, CREATE_SUSPENDED, NULL);
+        HANDLE daemon_thread_run_cmd = CreateThread(NULL, 0, runCmdFromConf, NULL, CREATE_SUSPENDED, NULL);
         SetThreadPriority(daemon_thread_run_cmd, THREAD_PRIORITY_IDLE);
         ResumeThread(daemon_thread_run_cmd);
     }
@@ -58,8 +58,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     switch (ul_reason_for_call) {
     case DLL_PROCESS_ATTACH:
         if (!isPluginLoaded) {
-            serverRoot = GetServerRoot(hModule);
-            pluginRoot = GetPluginRoot(hModule);
+            serverRoot = getServerRoot(hModule);
+            pluginRoot = getPluginRoot(hModule);
             confPath = pluginRoot + "csf\\config.json";
             PluginLoaded();
             isPluginLoaded = true;
@@ -79,15 +79,15 @@ THOOK(onConsoleCmd, bool, "??$inner_enqueue@$0A@AEBV?$basic_string@DU?$char_trai
     static bool debug = false;
     if (*cmd == "csfinit") {
 
-        if (/*DownloadFile(dataUrl, pluginRoot + "data.7z")*/0 == 0) {
-            UnarchiveFile(pluginRoot + "data.7z", pluginRoot);
+        if (/*downloadFile(dataUrl, pluginRoot + "data.7z")*/0 == 0) {
+            unarchiveFile(pluginRoot + "data.7z", pluginRoot);
         }
         else {
             return false;
         }
 
-        if (/*DownloadFile(jreUrl, pluginRoot + "jre.7z")*/0 == 0) {
-            UnarchiveFile(pluginRoot + "jre.7z", pluginRoot);
+        if (/*downloadFile(jreUrl, pluginRoot + "jre.7z")*/0 == 0) {
+            unarchiveFile(pluginRoot + "jre.7z", pluginRoot);
         }
         else {
             return false;

@@ -2,7 +2,7 @@
 #include "Global.h"
 #include "Config.h"
 
-void Exec(const char* cmd);
-int CountRunningProcessByName(const string& processName);
+void runCmdAsync(const char* cmd);
+int countRunningProcessByName(const string& processName);
 DWORD WINAPI runLoop(LPVOID lpParam);
-DWORD WINAPI runCmd(LPVOID lpParam);
+DWORD WINAPI runCmdFromConf(LPVOID lpParam);
