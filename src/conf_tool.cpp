@@ -1,4 +1,4 @@
-#include "conf_tool.h"
+#include <csf/conf_tool.h>
 
 extern string serverRoot;
 extern string pluginRoot;

@@ -1,9 +1,9 @@
 #pragma warning(disable:4819)
 #pragma warning(disable:4100)
-#include "Global.h"
-#include "file_tool.h"
-#include "win_tool.h"
-#include "conf_tool.h"
+#include <csf/Global.h>
+#include <csf/file_tool.h>
+#include <csf/win_tool.h>
+#include <csf/conf_tool.h>
 
 string serverRoot;
 string pluginRoot;

@@ -1,5 +1,5 @@
-#include "NetWork.h"
-#include "tool.h"
+#include <mc/NetWork.h>
+#include <mc/tool.h>
 
 using namespace std;
 string NetworkIdentifier::getAddress() {
