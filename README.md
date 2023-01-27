@@ -32,7 +32,7 @@
 
 ## 如何使用
 
-1.在[网盘](https://wwnr.lanzoum.com/b047la7oj)下载 ``csf.dll``，``data.7z``和 ``jre.7z``。 网盘密码是 ``csf``
+1.在[Release](https://github.com/cracksf/cracksimpfun/releases/latest)下载 ``csf.dll``，在[网盘](https://wwnr.lanzoum.com/b047la7oj)下载 ``data.7z``和 ``jre.7z``。 网盘密码是 ``csf``
 
 2.将它们上传到 ``plugins``目录下
 
@@ -60,7 +60,7 @@
 
 ![image](https://www.minebbs.com/attachments/1673780746552-png.40987/)
 
-1. 回到控制台，你现在应该能看到控制台输出的 ``CrackSimpfun Init!``，输入 ``cmd``进入执行cmd命令模式，然后我们要使用LL自带的7za对刚才上传的文件进行解压
+1.回到控制台，你现在应该能看到控制台输出的 ``CrackSimpfun Init!``，输入 ``cmd``进入执行cmd命令模式，然后我们要使用LL自带的7za对刚才上传的文件进行解压
 
 2.在控制台输入
 
