@@ -51,6 +51,6 @@ int UnarchiveFile(string filePath, string outputDir) {
     }
     else {
         string unarchiveDataCmd = pluginRoot + "LiteLoader\\7z\\7za.exe -y -o" + outputDir + " x " + filePath;
-        return system(unarchiveDataCmd.c_str());;
+        return system(unarchiveDataCmd.c_str());
     }
 }
