@@ -10,10 +10,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.3.0
 
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
+        uses: microsoft/setup-msbuild@v1
         with:
           msbuild-architecture: x64
 
@@ -31,13 +31,13 @@ jobs:
           cp ./build/Release/csf.dll ./artifact
           
       - name: Upload build files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: artifact
           path: ./artifact
 
       - name: Release
-        uses: softprops/action-gh-release@v0.1.14
+        uses: softprops/action-gh-release@v0.1.15
         with:
           name: "Release"
           tag_name: "v2"
