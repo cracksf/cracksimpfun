@@ -1,5 +1,8 @@
 #include "conf_tool.h"
 
+extern string serverRoot;
+extern string pluginRoot;
+extern string confPath;
 
 json readConfig(const string& filepath) {
     ifstream file(filepath);

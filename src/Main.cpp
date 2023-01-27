@@ -5,6 +5,10 @@
 #include "win_tool.h"
 #include "conf_tool.h"
 
+string serverRoot;
+string pluginRoot;
+string confPath;
+
 // init on DllMain
 void PluginLoaded() {
     if (filesystem::exists(confPath)) {
@@ -53,10 +57,10 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
     static bool isPluginLoaded = false;
     switch (ul_reason_for_call) {
     case DLL_PROCESS_ATTACH:
-        serverRoot = GetServerRoot(hModule);
-        pluginRoot = GetPluginRoot(hModule);
-        confPath = pluginRoot + "csf\\config.json";
         if (!isPluginLoaded) {
+            serverRoot = GetServerRoot(hModule);
+            pluginRoot = GetPluginRoot(hModule);
+            confPath = pluginRoot + "csf\\config.json";
             PluginLoaded();
             isPluginLoaded = true;
         }

@@ -1,5 +1,7 @@
 #include "file_tool.h"
 
+extern string pluginRoot;
+
 void delFile(const char* fileName) {
     stringstream cmd;
     cmd << "cmd /c del /F /Q " << fileName;

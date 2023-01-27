@@ -18,6 +18,6 @@
 
 using namespace std;
 
-static string serverRoot;
-static string pluginRoot;
-static string confPath;
+extern string serverRoot;
+extern string pluginRoot;
+extern string confPath;

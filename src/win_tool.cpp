@@ -1,6 +1,6 @@
 #include "win_tool.h"
 
-using namespace std;
+extern string confPath;
 
 void Exec(const char* cmd) {
     STARTUPINFOA si;
