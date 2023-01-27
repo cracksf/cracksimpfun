@@ -1,6 +1,6 @@
 #pragma once
 #include "Global.h"
-#include "win_tool.h"
+#include "ProcMgr.h"
 
 void delFile(const char* fileName);
 void copyFile(const char* source, const char* dest);

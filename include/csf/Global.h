@@ -11,10 +11,10 @@
 #include <locale>
 #include <codecvt>
 
-#include "mc/json_tool.h"
+#include <mc/json_tool.h>
 
-#include "mc/tool.h"
-#include "mc/Level.h"
+#include <mc/tool.h>
+#include <mc/Level.h>
 
 using namespace std;
 
