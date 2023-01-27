@@ -1,0 +1,6 @@
+.vs/
+.vscode/
+x64/
+test/
+build/
+*.user
