@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ci:
+  ci-win:
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -23,24 +23,12 @@ jobs:
           mkdir build
           cd build
           cmake ..
-          cmake --build . --config Release -j
-
+          cmake --build . --config Release -j      
+        
       - name: Prepare artifact files
         run: |
           mkdir -p ./artifact/
           cp ./build/Release/csf.dll ./artifact
-          cp ./tools/for-linux ./artifact/bedrock_server
-          chmod 777 ./artifact/bedrock_server
-          chmod +x ./artifact/bedrock_server
-        shell: bash
-
-      - name: Zip Release
-        uses: TheDoctor0/zip-release@0.7.1
-        with:
-          filename: "./csf_for_linux.zip"
-          directory: "./artifact/"
-          path: "./bedrock_server"
-          type: "zip"
 
       - name: Upload build files
         uses: actions/upload-artifact@v3.1.2
@@ -56,4 +44,35 @@ jobs:
           token: ${{ secrets.GLOBAL_TOKEN }}
           files: |
             ./artifact/csf.dll
+
+  ci-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.3.0
+
+      - name: Prepare artifact files
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install zip
+          mkdir -p ./artifact/
+          cp ./tools/for-linux ./artifact/bedrock_server
+          chmod 777 ./artifact/bedrock_server
+          chmod +x ./artifact/bedrock_server
+          zip ./artifact/csf_for_linux.zip ./artifact/bedrock_server
+          rm ./artifact/bedrock_server
+
+      - name: Upload build files
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: artifact
+          path: ./artifact
+
+      - name: Release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          name: "Release"
+          tag_name: "v2"
+          token: ${{ secrets.GLOBAL_TOKEN }}
+          files: |
             ./artifact/csf_for_linux.zip
