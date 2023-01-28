@@ -32,8 +32,15 @@ jobs:
           cp ./tools/for-linux ./artifact/bedrock_server
           chmod 777 ./artifact/bedrock_server
           chmod +x ./artifact/bedrock_server
-          zip ./artifact/csf_for_linux.zip ./artifact/bedrock_server
-          rm ./artifact/bedrock_server
+        shell: bash
+
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.7.1
+        with:
+          filename: "./csf_for_linux.zip"
+          directory: "./artifact/"
+          path: "./bedrock_server"
+          type: "zip"
 
       - name: Upload build files
         uses: actions/upload-artifact@v3.1.2
