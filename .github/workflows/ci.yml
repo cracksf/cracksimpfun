@@ -55,12 +55,13 @@ jobs:
         run: |
           sudo apt-get -y update
           sudo apt-get -y install zip
-          mkdir -p ./artifact/
-          cp ./tools/for-linux ./artifact/bedrock_server
-          chmod 777 ./artifact/bedrock_server
-          chmod +x ./artifact/bedrock_server
-          zip ./artifact/csf_for_linux.zip ./artifact/bedrock_server
-          rm ./artifact/bedrock_server
+          mkdir ./artifact/
+          cd ./artifact/
+          cp ../tools/for-linux ./bedrock_server
+          chmod 777 ./bedrock_server
+          chmod +x ./bedrock_server
+          zip ./csf_for_linux.zip ./bedrock_server
+          rm ./bedrock_server
 
       - name: Upload build files
         uses: actions/upload-artifact@v3.1.2
