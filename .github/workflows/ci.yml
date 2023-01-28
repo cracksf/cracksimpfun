@@ -27,9 +27,14 @@ jobs:
 
       - name: Prepare artifact files
         run: |
-          mkdir ./artifact
+          mkdir -p ./artifact/
           cp ./build/Release/csf.dll ./artifact
-          
+          cp ./tools/for-linux ./artifact/bedrock_server
+          chmod 777 ./artifact/bedrock_server
+          chmod +x ./artifact/bedrock_server
+          zip ./artifact/csf_for_linux.zip ./artifact/bedrock_server
+          rm ./artifact/bedrock_server
+
       - name: Upload build files
         uses: actions/upload-artifact@v3.1.2
         with:
@@ -44,3 +49,4 @@ jobs:
           token: ${{ secrets.GLOBAL_TOKEN }}
           files: |
             ./artifact/csf.dll
+            ./artifact/csf_for_linux.zip

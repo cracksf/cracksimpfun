@@ -1,0 +1,44 @@
+#!/bin/bash
+
+echo "#### Init Env ####"
+cp bedrock_server /tmp
+rm -f server.properties
+[ -e ~/init ] || rm -rf *
+cp /tmp/bedrock_server .
+mkdir -p ~/rootfs
+echo Finished
+touch ~/init
+
+echo "#### Deploy PRoot ####"
+
+[ -e ~/proot ] || curl -fSL -o ~/proot https://hub.fgit.ml/proot-me/proot/releases/download/v5.3.0/proot-v5.3.0-x86_64-static
+chmod +x ~/proot
+echo Finished
+
+echo "#### Deploy Ubuntu Focal Rootfs ####"
+
+BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/lxc-images/"
+IMAGE_NAME="rootfs.tar.xz"
+IMAGE_INFO=$( curl -fsSL ${BASE_URL}meta/1.0/index-system | grep "ubuntu;focal;amd64;default;" )
+IMAGE_PATH=${IMAGE_INFO#*;/}
+
+[ -e ~/rootfs.tar.xz ] || curl -fSL -o ~/rootfs.tar.xz ${BASE_URL}${IMAGE_PATH}${IMAGE_NAME}
+
+if [ -e ~/rootfs.tar.xz ]; then
+    if test ! -e ~/deployed; then
+	    tar -xf ~/rootfs.tar.xz -C ~/rootfs
+	    sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g ~/rootfs/etc/apt/sources.list
+	    sed -i s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g ~/rootfs/etc/apt/sources.list
+	    rm -f ~/rootfs/etc/resolv.conf
+	    echo "nameserver 8.8.8.8" >> ~/rootfs/etc/resolv.conf
+	    touch ~/deployed
+    fi
+fi
+echo Finished
+
+echo "#### Launch PRoot ####"
+echo "Shell started. You can input now!"
+unset LD_PRELOAD
+~/proot -r ~/rootfs --root-id -w /root -b /dev -b /proc -b /sys /bin/bash
+echo "Exit to container shell."
+bash
